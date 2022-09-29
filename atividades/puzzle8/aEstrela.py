@@ -120,10 +120,10 @@ class Puzzle:
         movimentos = []
         for i, j in itertools.product(range(self.tamanho), range(self.tamanho)):
             direcoes = {
-                    'R':(i, j-1),
-                    'L':(i, j+1),
-                    'D':(i-1, j),
-                    'U':(i+1, j)
+                    'D':(i, j-1),
+                    'E':(i, j+1),
+                    'B':(i-1, j),
+                    'C':(i+1, j)
                     }
 
             for acao, (x, y) in direcoes.items():
