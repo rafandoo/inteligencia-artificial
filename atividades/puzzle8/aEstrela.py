@@ -1,7 +1,7 @@
 import random
 import itertools
 import collections
-import time
+import timeit
 
 class No:
     """
@@ -207,9 +207,9 @@ if __name__ == '__main__':
     
     # Resolvendo o puzzle
     s = Solucionador(puzzle)
-    inicio = time.time()
+    inicio = timeit.default_timer()
     p = s.resolver()
-    fim = time.time()
+    fim = timeit.default_timer()
 
     # Imprimindo os passos para resolver o puzzle
     passos = 0
