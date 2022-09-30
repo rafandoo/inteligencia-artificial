@@ -66,11 +66,12 @@ class Solucionador:
         fila = collections.deque([No(self.start)])
         vistos = set()
         vistos.add(fila[0].estado)
+        cVistos = 0
         while fila:
             fila = collections.deque(sorted(list(fila), key=lambda no: no.g))
             no = fila.popleft()
             if no.resolvido:
-                return no.caminho
+                return no.caminho, cVistos
 
             for mover, acao in no.acoes:
                 filho = No(mover(), no, acao)
@@ -78,6 +79,7 @@ class Solucionador:
                 if filho.estado not in vistos:
                     fila.appendleft(filho)
                     vistos.add(filho.estado)
+                    cVistos += 1
 
 class Puzzle:
     """
@@ -184,7 +186,7 @@ if __name__ == '__main__':
     # Resolvendo o puzzle
     s = Solucionador(puzzle)
     inicio = timeit.default_timer()
-    p = s.resolver()
+    p, nos = s.resolver()
     fim = timeit.default_timer()
 
     # Imprimindo os passos para resolver o puzzle
@@ -194,5 +196,6 @@ if __name__ == '__main__':
         no.puzzle.imprimePuzzle()
         passos += 1
 
-    print("Numero de passos: ", passos)
-    print("Total de tempo para resolver: " + str(fim - inicio) + " segundos(s)")
+    print("Numero de passos: {}".format(passos))
+    print("Total de tempo para resolver: {} segundos".format(round(fim - inicio, 2)))
+    print("Total de nos visitados: {}".format(nos))
